@@ -1,0 +1,129 @@
+#include <iostream>
+struct box
+{
+    int num;
+    box* next;
+};
+struct control
+{
+    int count;
+    box* front;
+    box* rear;
+};
+int Empty(control* ptr) {
+    return (ptr->rear == NULL);
+}
+void inicialisation(control* ptr) {
+    ptr->count = 0;
+    ptr->front = NULL;
+    ptr->rear =  NULL;
+}
+void AddElement(control* st, int num) {
+    if (st->count <= FULL)
+    {
+        box* ptr = new box();
+        ptr->num = num;
+        ptr->next = NULL;
+        if (!Empty(st))
+        {
+            st->rear->next = ptr;
+            st->rear = ptr;
+        }
+        else
+        {
+            st->front = st->rear = ptr;
+        }
+        st->count++;
+    }
+    else
+    {
+        cout << "You  cant add element! " << endl;
+    }
+}
+void DeleteQueue(control* que) {
+    box* ptr = que->front;
+    free(ptr);
+    que->count--;
+    que->front = que->front->next;
+}
+void ShowQueue(box* que) {
+    if (que == NULL)
+    {
+        cout << "End..\n";
+    }
+    else
+    {
+        cout << que->num << endl;
+        ShowQueue(que = que->next);
+    }
+}
+box* FindMinOtriz(box* que, int size) {
+    int counter = 0;
+    box* ptr = que;
+    while (counter != size)
+    {
+        box* ptrnext = que;
+        if (ptr->num > ptrnext->num && ptrnext->num > 0 && ptr->num > 0)
+        {
+            ptr = ptrnext;
+        }
+        que= que->next;
+        counter++;
+    }
+    return ptr;
+}
+box* FindMaxOtriz(box* que, int size) {
+    int counter = 0;
+    box* max = NULL;
+    while (counter != size) {
+        box* ptr = que;
+        if (ptr->num < 0) {
+            max = ptr;
+            break;
+        }
+        else {
+            que = que->next;
+        }
+        counter++;
+    }
+    while (counter != size) {
+        box* ptrnext = que;
+        if (max->num > ptrnext->num && ptrnext->num < 0 && max->num < 0) {
+            max = ptrnext;
+        }
+        que = que->next;
+        counter++;
+    }
+    return max;
+}
+void print(box* ptr) {
+    cout << ptr->num << endl;
+}
+void SwapElements(box* min, box* max) {
+    swap(min->num, max->num);
+}
+int main()
+{
+    control* que = new control();
+    inicialisation(que);
+    AddElement(que, 12);
+    AddElement(que, 6);
+    AddElement(que, 3);
+    AddElement(que, 1);
+    AddElement(que, 13);
+    AddElement(que, -3213);
+    AddElement(que, -99);
+    AddElement(que, 14);
+    AddElement(que, 15);
+    AddElement(que, -3000000);
+    AddElement(que, 15);
+    ShowQueue(que->front);
+    cout << " min from pol is - ";
+    print(FindMinOtriz(que->front, que->count));
+    cout << "max from otriz is - ";
+    print(FindMaxOtriz(que->front, que->count));
+    cout << "Result: ";
+    SwapElements(FindMinOtriz(que->front, que->count), FindMaxOtriz(que->front, que->count));
+    ShowQueue(que->front);
+    return 0;
+}
