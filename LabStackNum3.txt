@@ -1,0 +1,124 @@
+#include <iostream>
+using namespace std;
+struct steck {
+    float number;
+    steck* next;
+};
+void Creataion(steck** top, float num) {
+    steck* chisl;
+    chisl = new steck();
+    chisl->number = num;
+    if (*top == NULL) {
+        *top = chisl;
+    }
+    else {
+        chisl->next = *top;
+        *top = chisl;
+    }
+}
+void show_stack(steck* top) {
+    steck* begin = top;
+    if (!begin) {
+        cout << "Стек пуст\n";
+    }
+    else {
+        while (begin != NULL) {
+            cout << begin->number << endl;
+            begin = begin->next;
+        }
+    }
+}
+bool check_for_copies(int num, steck* top){
+    steck* ptr = top;
+    while (ptr) {
+        if (ptr->number == num) {
+            return true;
+            break;
+        }
+        ptr = ptr->next;
+    }
+}
+void raspr(steck* top_stack_1, steck* top_stack_2, steck** top3) {
+    steck* ptr = top_stack_1;
+    bool flag_stack2;
+    bool flag_stack3;
+    while (ptr) {
+        flag_stack2 = check_for_copies(ptr->number, top_stack_2);
+        if (!flag_stack2) {
+            Creataion(top3, ptr->number);
+            break;
+        }
+        ptr = ptr->next;
+    }
+        ptr = ptr->next;
+        while (ptr) {
+            flag_stack2 = check_for_copies(ptr->number, top_stack_2);
+            flag_stack3 = check_for_copies(ptr->number, *top3);
+            if (!flag_stack2 && !flag_stack3) {
+                Creataion(top3, ptr->number);
+            }
+            ptr = ptr->next;
+        }
+}
+float sum_of_elements(steck* top) {
+    steck* ptr = top; float sum = 0;
+    while (ptr)
+    {
+        if (ptr->number - round(ptr->number) != 0) sum += ptr->number;
+        ptr = ptr->next;
+    }
+    return sum;
+}
+int main() {
+    setlocale(0, "rus");
+    srand(time(NULL));
+    int menu;
+    do {
+        cout << "1. Задание1\n2. Задание2\n";
+        cin >> menu;
+        switch (menu)
+        {
+        default: cout << "Wrong number !";
+        case 0: return 0; break;
+        case 1: {
+            steck* stack = NULL;
+            Creataion(&stack, 0.6);
+            Creataion(&stack, 235);
+            Creataion(&stack, 0.3);
+            Creataion(&stack, 12);
+            Creataion(&stack, 65);
+            Creataion(&stack, 5.7);
+            Creataion(&stack, 1.75);
+            cout << "Стек : \n";
+            show_stack(stack);
+            cout << endl << "Сумма вещественных чисел в данном стеке - " << sum_of_elements(stack) << endl;
+        }break;
+        case 2: {
+            steck* stack1 = NULL;
+            steck* stack2 = NULL;
+            steck* stackhead = NULL;
+            cout << "Введите размер стека : ";
+            int num;
+            cin >> num;
+            int chisl;
+            cout << "Генерируемые числа : \n";
+            for (int i = 0; i < num; i++) {
+                chisl = rand() % 30;
+                cout << chisl << '\t';
+                Creataion(&stack1, chisl);
+                chisl = rand() % 20;
+                cout << chisl << endl;
+                Creataion(&stack2, chisl);
+            }
+            cout << "\nStack1 : \n";
+            show_stack(stack1);
+            cout << "\nStack2 : \n";
+            show_stack(stack2);
+            raspr(stack1, stack2,&stackhead);
+            cout << "\nStack3 : \n";
+            show_stack(stackhead);
+            cout << endl;
+        } break;
+        }
+    } while (menu != 0);
+}
