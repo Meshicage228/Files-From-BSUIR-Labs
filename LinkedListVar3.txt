@@ -46,8 +46,7 @@ void FindMax(top head) {
     if (*head) {
         node* ptr = *head;
         node* maxptr = *head;
-        while (ptr)
-        {
+        while (ptr) {
             if (maxptr->number <= ptr->number) {
                 maxptr = ptr;
             }
@@ -60,8 +59,7 @@ void FindMin(top head) {
     if (*head) {
         node* ptr = *head;
         node* minptr = *head;
-        while (ptr)
-        {
+        while (ptr) {
             if (minptr->number >= ptr->number) {
                 minptr = ptr;
             }
@@ -80,8 +78,7 @@ void DeleteList(top head) {
 }
 //void ShowBool(top head) {
 //    node* ptr = *head;
-//    while (ptr)
-//    {
+//    while (ptr) {
 //        cout << ptr->flag_to_delete << endl;
 //        ptr = ptr->next;
 //    }
@@ -90,24 +87,21 @@ bool ChooseDoubled(top head, top newhead) {
     node* firstptr = *head;
     node* checkptr;
     bool no_copies = false;
-    while (firstptr)
-    {
+    while (firstptr) {
         checkptr = firstptr->next;
-        while (checkptr)
-        {
+        while (checkptr) {
             if (firstptr->number == checkptr->number) {
                 no_copies = true;
                 firstptr->flag_to_delete = true;
                 checkptr->flag_to_delete = true;
-           }
+            }
             checkptr = checkptr->next;
         }
         firstptr = firstptr->next;
     }
     if (no_copies) {
         firstptr = *head;
-        while (firstptr)
-        {
+        while (firstptr) {
             if (!firstptr->flag_to_delete) Push(newhead, firstptr->number);
             firstptr = firstptr->next;
         }
@@ -122,9 +116,8 @@ int main() {
     node* List = NULL;
     node* ListNew = NULL;
     int a;
-    for (int i = 0; i < 10; i++)
-    {
-        a = rand() % 10;
+    for (int i = 0; i < 10; i++) {
+        a = rand() % 50;
         Push(&List, a);
     }
     ShowList(&List);
