@@ -7,4 +7,4 @@ void hash_table_instert(box*);
 int search_for_box(int);
 void hesh_delete_point(int);
 void show_priority(int);
-
+// just methods lol
