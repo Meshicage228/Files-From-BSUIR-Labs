@@ -13,16 +13,16 @@ void ImplementAndShow(LinkedGrath* gr, int key, int option) {
     else if (option == 2) {
         deleteVerx(gr, key);
     }
-    cout << "Ïîêàçàòü ãðàô ? \n1.Äà\n2.Íåò\nÎïöèÿ: ";
+    cout << "ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã£Ã°Ã Ã´ ? \n1.Ã„Ã \n2.ÃÃ¥Ã²\nÃŽÃ¯Ã¶Ã¨Ã¿: ";
     cin >> choice;
     if (choice == 1) {
-        cout << "Ïîëó÷èâøèéñÿ ãðàô : \n";
+        cout << "ÃÃ®Ã«Ã³Ã·Ã¨Ã¢Ã¸Ã¨Ã©Ã±Ã¿ Ã£Ã°Ã Ã´ : \n";
         printGrath(gr);
     }
-    cout << "Ïîêàçàòü ìàòðèöó ñìåæíîñòè ? \n1.Äà\n2.Íåò\nÎïöèÿ: ";
+    cout << "ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã¬Ã Ã²Ã°Ã¨Ã¶Ã³ Ã±Ã¬Ã¥Ã¦Ã­Ã®Ã±Ã²Ã¨ ? \n1.Ã„Ã \n2.ÃÃ¥Ã²\nÃŽÃ¯Ã¶Ã¨Ã¿: ";
     cin >> choice;
     if (choice == 1) {
-        cout << "Ìàòðèöà : \n";
+        cout << "ÃŒÃ Ã²Ã°Ã¨Ã¶Ã  : \n";
         ShowMatrix(gr);
     }
     cout << endl;
@@ -41,14 +41,14 @@ int main() {
     };
     int number_of_elements = sizeof(edges) / sizeof(edges[0]);
     LinkedGrath* grathnew = createGrath(edges, number_of_elements);
-    cout << "Èçíà÷àëüíûé ãðàô : \n";
+    cout << "ÃˆÃ§Ã­Ã Ã·Ã Ã«Ã¼Ã­Ã»Ã© Ã£Ã°Ã Ã´ : \n";
     printGrath(grathnew);
-    cout << "Èçíà÷àëüíàÿ ìàòðèöà ñìåæíîñòè : \n";
+    cout << "ÃˆÃ§Ã­Ã Ã·Ã Ã«Ã¼Ã­Ã Ã¿ Ã¬Ã Ã²Ã°Ã¨Ã¶Ã  Ã±Ã¬Ã¥Ã¦Ã­Ã®Ã±Ã²Ã¨ : \n";
     ShowMatrix(grathnew);
     int choice = 0;
     int show_grath;
     do {
-        cout << "1.Óäàëèòü ðåáðî 2\n2.Óäàëèòü âåðèøíó N7\nÎïöèÿ:";
+        cout << "1.Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã°Ã¥Ã¡Ã°Ã® 2\n2.Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã¢Ã¥Ã°Ã¨Ã¸Ã­Ã³ N7\nÃŽÃ¯Ã¶Ã¨Ã¿:";
         cin >> choice;
         cout << endl;
         switch (choice) {
@@ -64,4 +64,5 @@ int main() {
 
         }
     } while (choice > 0 && choice < 4);
+    return 0;
 }
