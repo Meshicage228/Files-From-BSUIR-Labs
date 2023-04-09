@@ -1,6 +1,6 @@
 #include "Header.h"
 #include <iostream>
-
+//fucking rus
 using namespace std;
 #define SIZE_TABLE 20
 
