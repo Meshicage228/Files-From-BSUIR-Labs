@@ -52,7 +52,6 @@ int main()
         case 5: cout << "Выход..."; return 0;
         default: cout << "Неверная опция...\n";
             break;
-        
         }
     } while (true);
 }
