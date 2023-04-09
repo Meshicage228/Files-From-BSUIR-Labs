@@ -21,7 +21,7 @@ void init_hash_table() {
     }
 }
 void print_table() {
-    cout << "Íà÷àëî õåø-òàáëèöû : \n";
+    cout << "ÃÃ Ã·Ã Ã«Ã® ÃµÃ¥Ã¸-Ã²Ã Ã¡Ã«Ã¨Ã¶Ã» : \n";
     for (int i = 0; i < SIZE_TABLE; i++) {
         if (push_table[i] == NULL) {
             cout << i << " ----------- \n";
@@ -30,7 +30,7 @@ void print_table() {
             cout << i << " " << push_table[i]->num << endl;
         }
     }
-    cout << "Êîíåö.\n ";
+    cout << "ÃŠÃ®Ã­Ã¥Ã¶.\n ";
 }
 void hash_table_instert(box* p) {
     int index = hashing(p->num);
@@ -81,13 +81,14 @@ int search_for_box(int a) {
 }
 void hesh_delete_point(int a) {
     int index = search_for_box(a);
-    if (index == -1) cout << "Òàêîå ÷èñëî íå îáíàðóæåíî\n";
+    if (index == -1) cout << "Ã’Ã ÃªÃ®Ã¥ Ã·Ã¨Ã±Ã«Ã® Ã­Ã¥ Ã®Ã¡Ã­Ã Ã°Ã³Ã¦Ã¥Ã­Ã®\n";
     else {
         push_table[index] = NULL;
-        cout << "Ïîñëå óäàëåíèÿ :\n";
+        cout << "ÃÃ®Ã±Ã«Ã¥ Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¿ :\n";
         print_table();
     }
 }
+// Algorithm like Selection sort
 void show_priority(int n) {
     for (int i = 0; i < n; i++) {
         int k = 0;
