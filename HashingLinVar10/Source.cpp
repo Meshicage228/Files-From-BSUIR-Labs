@@ -12,7 +12,7 @@ using namespace std;
 box* push_table[SIZE_TABLE];
 unsigned int hashing(int a) {
     int hash_value = 0;
-    hash_value = a % 20;
+    hash_value = a % SIZE_TABLE;
     return hash_value;
 }
 void init_hash_table() {
