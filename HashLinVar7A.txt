@@ -15,21 +15,17 @@ unsigned int hashing(int a) {
     return hash_value;
 }
 void init_hash_table() {
-    for (int i = 0; i < SIZE_TABLE; i++)
-    {
+    for (int i = 0; i < SIZE_TABLE; i++) {
         push_table[i] = NULL;
     }
 }
 void print_table() {
     cout << "Start of hash table : \n";
-    for (int i = 0; i < SIZE_TABLE; i++)
-    {
-        if (push_table[i] == NULL)
-        {
+    for (int i = 0; i < SIZE_TABLE; i++) {
+        if (push_table[i] == NULL) {
             cout << i << " -----------\n";
         }
-        else
-        {
+        else {
             cout << i << " " << push_table[i]->num << endl;
         }
     }
@@ -42,12 +38,10 @@ void hash_table_instert(person* p) {
         push_table[index] = p;
         p->index = index;
     }
-    else
-    {
+    else {
         do {
             while (index != SIZE_TABLE - 1) {
-                if (push_table[index] == NULL)
-                {
+                if (push_table[index] == NULL) {
                     push_table[index] = p;
                     p->index = index;
                     flag = false;
@@ -66,13 +60,11 @@ int search_for_person(int a) {
     int tries = 0;
     do {
             while (index != SIZE_TABLE - 1) {
-                if (push_table[index] == NULL)
-                {
+                if (push_table[index] == NULL) {
                     index++;
                     continue;
                 }
-                if (push_table[index]->num == a)
-                {
+                if (push_table[index]->num == a) {
                     return index; flag = false; break;
                 }
                 index++;
@@ -86,19 +78,16 @@ int search_for_person(int a) {
 }
 void hesh_delete_point(int a) {
     if (search_for_person(a) == -1) cout << "We cannot delete impossible number\n";
-    else
-    {
+    else {
         int index = search_for_person(a);
         push_table[index] = NULL;
     }
 }
-int main()
-{
+int main() {
     init_hash_table();
     person arr[8];
     cout << "Array : \n";
-    for (int i = 0; i < 8; i++)
-    {   
+    for (int i = 0; i < 8; i++) {   
         arr[i].num = rand() % 3601 + 3200;
         cout << i << " ---- " << arr[i].num << endl;
         hash_table_instert(&arr[i]); 
