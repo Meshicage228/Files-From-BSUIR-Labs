@@ -56,7 +56,7 @@ void ShowAllStacks() {
     ShowStack(PositiveStack);
     cout << "Negative Stack is \n";
     ShowStack(NegativeStack);
-}
+} 
 int CheckAndSetSize() {
     int size_of_stack;
     do {
