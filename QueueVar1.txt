@@ -50,18 +50,18 @@ void AddEvenNumbersToNewQueue(Element* source, QueueController* destination) {
      }
 }
 int CheckAndSetSize() {
-    int size_of_stack;
+    int size_of_queue;
     do {
         cout << "Set size of Main Queue : ";
-        cin >> size_of_stack;
-    } while (size_of_stack <= 0);
-    return size_of_stack;
+        cin >> size_of_queue;
+    } while (size_of_queue <= 0);
+    return size_of_queue;
 }
 void WriteElementsToQueue(QueueController* destination) {
-     int size_of_stack = CheckAndSetSize();
+     int size_of_queue = CheckAndSetSize();
      int element_to_push;
      cout << "Write elements :\n";
-     for (int i = 0; i < size_of_stack; i++) {
+     for (int i = 0; i < size_of_queue; i++) {
          cin >> element_to_push;
          AddElementToQueue(destination, element_to_push);
      }
