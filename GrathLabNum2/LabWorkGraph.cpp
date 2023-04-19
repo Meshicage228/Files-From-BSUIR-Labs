@@ -8,22 +8,22 @@ struct Edge {
 void ImplementAndShow(LinkedGrath* gr, int key, int option) {
     int choice;
     if (option == 1) {
-        deleteNodes(gr, key);
+        DeleteNodes(gr, key);
     }
     else if (option == 2) {
-        deleteVerx(gr, key);
+        DeleteVertex(gr, key);
     }
-    cout << "Ïîêàçàòü ãðàô ? \n1.Äà\n2.Íåò\nÎïöèÿ: ";
+    cout << "Show Grath ? \n1.Yes\n2.No\nOption: ";
     cin >> choice;
     if (choice == 1) {
-        cout << "Ïîëó÷èâøèéñÿ ãðàô : \n";
-        printGrath(gr);
+        cout << "Generated Grath : \n";
+        PrintGrath(gr);
     }
-    cout << "Ïîêàçàòü ìàòðèöó ñìåæíîñòè ? \n1.Äà\n2.Íåò\nÎïöèÿ: ";
+    cout << "Show adjancency matrix for that Grath ? \n1.Yes\n2.No\nOption: ";
     cin >> choice;
     if (choice == 1) {
-        cout << "Ìàòðèöà : \n";
-        ShowMatrix(gr);
+        cout << "Matrix : \n";
+        CreateAndShowAdjacencyMatrix(gr);
     }
     cout << endl;
 }
@@ -40,17 +40,15 @@ int main() {
         {8, 1, 4}, {8, 7, 2}, {8, 6, 3}, {8, 5, 6},
     };
     int number_of_elements = sizeof(edges) / sizeof(edges[0]);
-    LinkedGrath* grathnew = createGrath(edges, number_of_elements);
-    cout << "Èçíà÷àëüíûé ãðàô : \n";
-    printGrath(grathnew);
-    cout << "Èçíà÷àëüíàÿ ìàòðèöà ñìåæíîñòè : \n";
-    ShowMatrix(grathnew);
+    LinkedGrath* grathnew = CreateGrath(edges, number_of_elements);
+    cout << "The original graph : \n";
+    PrintGrath(grathnew);
+    cout << "The original adjancency matrix : \n";
+    CreateAndShowAdjacencyMatrix(grathnew);
     int choice = 0;
-    int show_grath;
     do {
-        cout << "1.Óäàëèòü ðåáðî 2\n2.Óäàëèòü âåðèøíó N7\nÎïöèÿ:";
-        cin >> choice;
-        cout << endl;
+        cout << "1.Delete Nodes Number 2 \n2.Delete Vertex N7\n3.Exit\nOption :";
+        cin >> choice; cout << endl;
         switch (choice) {
         case 1: {
             ImplementAndShow(grathnew, 2, 1);
@@ -60,9 +58,8 @@ int main() {
             ImplementAndShow(grathnew, 7, 2);
             break;
         }
-        default: cout << "No option" << endl; return 0;
-
+        default: cout << "No option" << endl; break;
+        case 3: cout << "Exist..."; return 0;
         }
-    } while (choice > 0 && choice < 4);
-    return 0;
+    } while (true);
 }
