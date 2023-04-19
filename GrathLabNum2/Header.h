@@ -1,10 +1,16 @@
 #pragma once
 
-struct Node;
+struct Element;
 struct LinkedGrath;
 struct Edge;
-LinkedGrath* createGrath(Edge[], int);
-void printGrath(LinkedGrath*);
-void ShowMatrix(LinkedGrath*);
-void deleteNodes(LinkedGrath*, int);
-void deleteVerx(LinkedGrath*, int);
+LinkedGrath* CreateGrath(Edge[], int);
+void PrintGrath(LinkedGrath*);
+void DeleteNodes(LinkedGrath*, int);
+void DeleteVertex(LinkedGrath*, int);
+
+void CreateAndShowAdjacencyMatrix(LinkedGrath*);
+// Components of AdjacencyMatrix
+void CreateEmptyMatrix();
+void FillMatrixWithData(LinkedGrath*);
+void PrintAdjacencyMatrix();
+// Components of AdjacencyMatrix
