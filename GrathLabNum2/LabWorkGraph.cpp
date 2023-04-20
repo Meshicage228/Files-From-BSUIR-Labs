@@ -8,10 +8,10 @@ struct Edge {
 void ImplementAndShow(LinkedGrath* gr, int key, int option) {
     int choice;
     if (option == 1) {
-        DeleteNodes(gr, key);
+        NodeToDelete(gr, key);
     }
     else if (option == 2) {
-        DeleteVertex(gr, key);
+        VertexToDelete(gr, key);
     }
     cout << "Show Grath ? \n1.Yes\n2.No\nOption: ";
     cin >> choice;
