@@ -1,52 +1,51 @@
 #include "Header.h"
 #include <iostream>
-//fucking rus
+
 using namespace std;
 #define SIZE_TABLE 20
 
- struct box {
-    int num;
+struct Element {
+    int number;
     int index;
     bool priority;
 };
-box* push_table[SIZE_TABLE];
-unsigned int hashing(int a) {
+
+Element* HashTable[SIZE_TABLE];
+
+unsigned int HashingNumber(int num) {
     int hash_value = 0;
-    hash_value = a % SIZE_TABLE;
+    hash_value = num % SIZE_TABLE;
     return hash_value;
 }
-void init_hash_table() {
-    for (int i = 0; i < SIZE_TABLE; i++) {
-        push_table[i] = NULL;
-    }
+void InitializeHashTable() {
+    for (int i = 0; i < SIZE_TABLE; i++)
+        HashTable[i] = NULL;
 }
-void print_table() {
-    cout << "Íà÷àëî õåø-òàáëèöû : \n";
+void PrintHashTable() {
+    cout << "The begining of HashTable : \n";
     for (int i = 0; i < SIZE_TABLE; i++) {
-        if (push_table[i] == NULL) {
+        if (HashTable[i] == NULL) 
             cout << i << " ----------- \n";
-        }
-        else {
-            cout << i << " " << push_table[i]->num << endl;
-        }
+        else
+            cout << i << " " << HashTable[i]->number << endl;
     }
-    cout << "Êîíåö.\n ";
+    cout << "The end...\n\n";
 }
-void hash_table_instert(box* p) {
-    int index = hashing(p->num);
+void PushElementToHashTable(Element* p) {
+    int index = HashingNumber(p->number);
     bool flag = true;
 
-    if (push_table[index] == NULL) {
-        push_table[index] = p;
-        push_table[index]->priority = false;
+    if (HashTable[index] == NULL) {
+        HashTable[index] = p;
+        HashTable[index]->priority = false;
         p->index = index;
     }
     else {
         do {
             while (index != SIZE_TABLE - 1) {
-                if (push_table[index] == NULL) {
-                    push_table[index] = p;
-                    push_table[index]->priority = false;
+                if (HashTable[index] == NULL) {
+                    HashTable[index] = p;
+                    HashTable[index]->priority = false;
                     p->index = index;
                     flag = false;
                     break;
@@ -58,61 +57,56 @@ void hash_table_instert(box* p) {
 
     }
 }
-int search_for_box(int a) {
-    int index = hashing(a);
+int SearchNumber(int num) {
+    int index = HashingNumber(num);
     bool flag = true;
     int tries = 0;
     do {
         while (index != SIZE_TABLE) {
-            if (push_table[index] == NULL) {
+            if (HashTable[index] == NULL) {
                 index++;
                 continue;
             }
-            if (push_table[index]->num == a) {
+            if (HashTable[index]->number == num)
                 return index;
-            }
             index++;
         }
         index = 0;
         tries++;
         if (tries == 2) break;
     } while (flag);
-    return -1;
+    return NULL;
 }
-void hesh_delete_point(int a) {
-    int index = search_for_box(a);
-    if (index == -1) cout << "Òàêîå ÷èñëî íå îáíàðóæåíî\n";
+void DeleteNumber(int num) {
+    int index = SearchNumber(num);
+    if (index == NULL) cout << "The number wasnt found\n";
     else {
-        push_table[index] = NULL;
-        cout << "Ïîñëå óäàëåíèÿ :\n";
-        print_table();
+        HashTable[index] = NULL;
+        cout << "HashTable after delete :\n";
+        PrintHashTable();
     }
 }
-// Algorithm like Selection sort
-void show_priority(int n) {
-    for (int i = 0; i < n; i++) {
+void WriteInDescendingOrder(int size) {
+    for (int i = 0; i < size; i++) {
         int k = 0;
         while (k < SIZE_TABLE) {
-            if (push_table[k] == NULL || push_table[k]->priority == true) k++;
-            else if (push_table[k] != NULL && push_table[k]->priority == false) break;
+            if (HashTable[k] == NULL || HashTable[k]->priority == true) k++;
+            else if (HashTable[k] != NULL && HashTable[k]->priority == false) break;
             else k++;
 
         }
-        box* ptr = push_table[k];
+        Element* ptr = HashTable[k];
         while (k < SIZE_TABLE) {
-            if (push_table[k] != NULL && push_table[k]->priority == false) {
-                if (ptr->num <= push_table[k]->num) {
-                    ptr = push_table[k];
-                }
-            }
+            if (HashTable[k] != NULL && HashTable[k]->priority == false)
+                if (ptr->number <= HashTable[k]->number)
+                    ptr = HashTable[k];
             k++;
         }
         ptr->priority = true;
-        cout << ptr->index << '\t' << ptr->num << endl;
+        cout << "     " << ptr->index << '\t' << '\t' << ptr->number << endl;
     }
     for (int i = 0; i < SIZE_TABLE; i++) {
-        if (push_table[i] != NULL) {
-            push_table[i]->priority = false;
-        }
+        if (HashTable[i] != NULL)
+            HashTable[i]->priority = false;
     }
 }
