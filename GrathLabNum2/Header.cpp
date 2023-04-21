@@ -47,18 +47,18 @@ void PrintGrath(LinkedGrath* LinkedGrath) {
         cout << endl;
     }
     cout << endl;
-  
+
 }
 void CreateEmptyMatrix() {
-    for (int i = 1; i < N; i++) {
+    for (int i = 0; i < N; i++) {
         adjacency_array[i] = new bool[N];
-        for (int j = 1; j < N; j++) {
+        for (int j = 0; j < N; j++) {
             adjacency_array[i][j] = false;
         }
     }
 }
-void FillMatrixWithData(LinkedGrath* grath){
-    for (int i = 1; i < N; i++) {
+void FillMatrixWithData(LinkedGrath* grath) {
+    for (int i = 0; i < N; i++) {
         if (grath->head[i] == NULL) continue;
         Element* ptr = grath->head[i];
         while (ptr) {
@@ -68,8 +68,8 @@ void FillMatrixWithData(LinkedGrath* grath){
     }
 }
 void PrintAdjacencyMatrix() {
-    for (int i = 1; i < N; i++) {
-        for (int j = 1; j < N; j++) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
             cout << adjacency_array[i][j] << " ";
         }
         cout << endl;
@@ -95,30 +95,30 @@ Element* DeleteNodeOrVertexAroundHead(Element* ptrs, int key) {
         if (ptr->next == NULL && (ptr->source == key || ptr->destination == key))
             ptr = NULL;
     }
-     ptrs = ptr;
+    ptrs = ptr;
     return ptrs;
 }
 void DeleteNode(Element* ptrs, int key) {
     Element* ptr = ptrs;
     Element* nextp = NULL;
-        while (ptr->next) {
-            nextp = ptr->next;
-            if (nextp->priority == key && nextp) {
-                while (nextp->priority == key && nextp->next)
-                    nextp = nextp->next;
-                if (nextp->next == NULL && nextp->priority == key) {
-                    ptr->next = NULL; break;
-                }
-                else {
-                    ptr->next = nextp;
-                    ptr = nextp;
-                }
+    while (ptr->next) {
+        nextp = ptr->next;
+        if (nextp->priority == key && nextp) {
+            while (nextp->priority == key && nextp->next)
+                nextp = nextp->next;
+            if (nextp->next == NULL && nextp->priority == key) {
+                ptr->next = NULL; break;
             }
-            else
-                ptr = ptr->next;
+            else {
+                ptr->next = nextp;
+                ptr = nextp;
+            }
         }
+        else
+            ptr = ptr->next;
+    }
 }
-void DeleteVertex(Element* ptrs, int key){
+void DeleteVertex(Element* ptrs, int key) {
     Element* ptr = ptrs;
     Element* nextp = NULL;
     while (ptr->next) {
@@ -139,15 +139,15 @@ void DeleteVertex(Element* ptrs, int key){
     }
 }
 void DeleteVertexOrNode(LinkedGrath* grath, int key) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < N; i++) {
         if (grath->head[i] == NULL)
             continue;
-        if (grath->head[i]->priority == key || grath->head[i]->source == key || grath->head[i]->destination== key)
+        if (grath->head[i]->priority == key || grath->head[i]->source == key || grath->head[i]->destination == key)
             grath->head[i] = DeleteNodeOrVertexAroundHead(grath->head[i], key);
         if (grath->head[i] != NULL) {
             if (DELETE_NODE == key)
                 DeleteNode(grath->head[i], key);
-            else 
+            else
                 DeleteVertex(grath->head[i], key);
         }
     }
