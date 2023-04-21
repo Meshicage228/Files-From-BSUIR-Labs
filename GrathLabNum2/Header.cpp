@@ -2,9 +2,6 @@
 #include <iostream>
 using namespace std;
 
-#define N 9
-#define DELETE_VERTEX 7
-#define DELETE_NODE 2
 bool** adjacency_array = new bool* [N];
 
 struct Element {
@@ -141,26 +138,20 @@ void DeleteVertex(Element* ptrs, int key){
             ptr = ptr->next;
     }
 }
-void NodeToDelete(LinkedGrath* grath, int key) {
+void DeleteVertexOrNode(LinkedGrath* grath, int key) {
     for (int i = 0; i < N; i++) {
         if (grath->head[i] == NULL)
             continue;
         if (grath->head[i]->priority == key)
             grath->head[i] = DeleteNodeOrVertexAroundHead(grath->head[i], key);
-        if (grath->head[i] != NULL)
-            DeleteNode(grath->head[i], key);
+        if (grath->head[i] != NULL) {
+            if (DELETE_NODE == key)
+                DeleteNode(grath->head[i], key);
+            else 
+                DeleteVertex(grath->head[i], key);
+        }
     }
 }
-void VertexToDelete(LinkedGrath* grath, int key) {
-    for (int i = 0; i < N; i++) {
-        if (grath->head[i] == NULL)
-            continue;
-        if (grath->head[i]->source == key || grath->head[i]->destination == key)
-            grath->head[i] = DeleteNodeOrVertexAroundHead(grath->head[i], key);
-        if (grath->head[i] != NULL)
-            DeleteVertex(grath->head[i], key);
-    }
 
-}
 
 
