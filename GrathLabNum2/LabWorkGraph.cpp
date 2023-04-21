@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Header.h"
 using namespace std;
-#define N 9
+
 struct Edge {
     int source_num, dest_num, prior;
 };
@@ -29,24 +29,26 @@ void ImplementAndShow(LinkedGrath* gr, int key, int option) {
 int main() {
     setlocale(0, "rus");
     Edge edges[] = {
-        {1, 2, 3}, {1, 7, 2}, {1, 8, 4}, {1, 3 ,2}, {1, 4 ,2},
-        {2, 1, 3}, {2, 7, 2}, {2, 3, 1}, {2, 5 ,4}, {2, 4 ,2},
-        {7, 1, 2}, {7, 2, 2}, {7, 8, 2}, {7, 5, 7},
-        {3, 2, 1}, {3, 5, 4}, {3, 4, 3},
-        {4, 3, 3}, {4, 5, 2}, {4, 6, 1},
-        {5, 3, 4}, {5, 4, 2}, {5, 6, 7},  {5, 8, 6}, {5, 2 ,4}, {5, 3 ,2}, {5, 7, 7},
-        {6, 8, 3}, {6, 4, 1}, {6, 5, 7},
-        {8, 1, 4}, {8, 7, 2}, {8, 6, 3}, {8, 5, 6},
+        {1, 2, 3}, {1, 7, 1}, {1, 8, 4}, 
+        {2, 1, 3}, {2, 6, 4}, {2, 3, 5}, {2, 7 ,2},
+        {3, 2, 5}, {3, 6, 6}, {3, 4, 3},
+        {4, 3, 3}, {4, 6, 4}, {4, 5, 8}, {4, 9, 7},
+        {5, 1, 3}, {5, 6, 6}, {5, 4, 8}, {5, 9, 7},
+        {6, 1, 2}, {6, 2, 4}, {6, 3, 6}, {6, 4, 4}, {6, 5, 4},
+        {7, 8, 7}, {7, 1, 2}, {7, 2, 2}, {7, 6, 2}, {7, 5, 3},
+        {8, 1, 4}, {8, 7, 7},
+        {9, 5, 7}, {9, 4, 3}
     };
     int number_of_elements = sizeof(edges) / sizeof(edges[0]);
     LinkedGrath* grathnew = CreateGrath(edges, number_of_elements);
     cout << "The original graph : \n";
     PrintGrath(grathnew);
+
     cout << "The original adjancency matrix : \n";
     CreateAndShowAdjacencyMatrix(grathnew);
     int choice = 0;
     do {
-        cout << "1.Delete Nodes Number 2 \n2.Delete Vertex N7\n3.Exit\nOption :";
+        cout << "1.Delete Nodes Number " << DELETE_NODE << "\n2.Delete Vertex Number " << DELETE_VERTEX << "\n3.Exit\nOption :";
         cin >> choice; cout << endl;
         switch (choice) {
         case 1: {
