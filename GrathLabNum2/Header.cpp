@@ -37,6 +37,7 @@ LinkedGrath* CreateGrath(Edge edges[], int n) {
     return ptr;
 }
 void PrintGrath(LinkedGrath* LinkedGrath) {
+
     for (int i = 0; i < N; i++) {
         Element* ptr = LinkedGrath->head[i];
         while (ptr != NULL) {
@@ -46,6 +47,7 @@ void PrintGrath(LinkedGrath* LinkedGrath) {
         cout << endl;
     }
     cout << endl;
+  
 }
 void CreateEmptyMatrix() {
     for (int i = 1; i < N; i++) {
@@ -84,16 +86,16 @@ Element* DeleteNodeOrVertexAroundHead(Element* ptrs, int key) {
     if (key == DELETE_NODE) {
         while (ptr->priority == key && ptr->next)
             ptr = ptr->next;
+        if (ptr->next == NULL && ptr->priority == key)
+            ptr = NULL;
     }
     else {
         while ((ptr->source == key || ptr->destination == key) && ptr->next)
             ptr = ptr->next;
+        if (ptr->next == NULL && (ptr->source == key || ptr->destination == key))
+            ptr = NULL;
     }
-    if (ptr->next == NULL) {
-        delete[] ptr;
-        ptrs = NULL;
-    }
-    else ptrs = ptr;
+     ptrs = ptr;
     return ptrs;
 }
 void DeleteNode(Element* ptrs, int key) {
@@ -111,7 +113,6 @@ void DeleteNode(Element* ptrs, int key) {
                     ptr->next = nextp;
                     ptr = nextp;
                 }
-
             }
             else
                 ptr = ptr->next;
@@ -132,17 +133,16 @@ void DeleteVertex(Element* ptrs, int key){
                 ptr->next = nextp;
                 ptr = nextp;
             }
-
         }
         else
             ptr = ptr->next;
     }
 }
 void DeleteVertexOrNode(LinkedGrath* grath, int key) {
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < 10; i++) {
         if (grath->head[i] == NULL)
             continue;
-        if (grath->head[i]->priority == key)
+        if (grath->head[i]->priority == key || grath->head[i]->source == key || grath->head[i]->destination== key)
             grath->head[i] = DeleteNodeOrVertexAroundHead(grath->head[i], key);
         if (grath->head[i] != NULL) {
             if (DELETE_NODE == key)
