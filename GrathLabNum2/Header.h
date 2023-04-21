@@ -1,8 +1,8 @@
 #pragma once
 
-#define N 9
-#define DELETE_VERTEX 7
-#define DELETE_NODE 2
+#define N 10 // Here write YOUR N = (number of vertexes + 1)
+#define DELETE_VERTEX 6 // Here write YOUR vertex, which you want to delete
+#define DELETE_NODE 3 // Here write YOUR node, which you want to delete
 
 struct Element;
 struct LinkedGrath;
