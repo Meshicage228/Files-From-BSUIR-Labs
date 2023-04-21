@@ -7,12 +7,11 @@ struct Edge {
 };
 void ImplementAndShow(LinkedGrath* gr, int key, int option) {
     int choice;
-    if (option == 1) {
-        NodeToDelete(gr, key);
-    }
-    else if (option == 2) {
-        VertexToDelete(gr, key);
-    }
+    if (option == 1) 
+        DeleteVertexOrNode(gr, key);   
+    else if (option == 2) 
+        DeleteVertexOrNode(gr, key);
+
     cout << "Show Grath ? \n1.Yes\n2.No\nOption: ";
     cin >> choice;
     if (choice == 1) {
@@ -51,11 +50,11 @@ int main() {
         cin >> choice; cout << endl;
         switch (choice) {
         case 1: {
-            ImplementAndShow(grathnew, 2, 1);
+            ImplementAndShow(grathnew, DELETE_NODE, 1);
             break;
         }
         case 2: {
-            ImplementAndShow(grathnew, 7, 2);
+            ImplementAndShow(grathnew, DELETE_VERTEX, 2);
             break;
         }
         default: cout << "No option" << endl; break;
