@@ -1,0 +1,116 @@
+#include <iostream>
+using namespace std;
+void RandomArray(int arr[], int size) {
+    cout << "Array : " << endl;
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 200;
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+void ShowArray(int arr[], int size) {
+    cout << "Sorted version : " << endl;
+    for (int i = 0; i < 30; i++) 
+        cout << arr[i] << " ";
+  
+    cout << endl;
+}
+void BubbleSort(int arr[], int start, int size) {
+    RandomArray(arr, 30);
+    for (int i = start; i < size; i++)
+        for (int j = 1; j < size; j++) 
+            if (arr[j - 1] > arr[j])
+                swap(arr[j], arr[j - 1]);
+    ShowArray(arr, size);
+}
+void InsertionSort(int arr[], int start, int size) {
+    RandomArray(arr, 30);
+    for (int i = 0; i < size; i++) {
+        int min = i;
+        for (int j = i + 1; j < size; j++)
+            if (arr[min] > arr[j]) {
+                min = j;
+                swap(arr[i], arr[min]);
+            }
+    }
+    ShowArray(arr, size);
+}
+int Partition(int arr[], int start, int end_point) {
+    int i = start;
+    while (i < end_point) {
+        if (arr[i] > arr[end_point] && i == end_point - 1) {
+            swap(arr[i], arr[end_point]);
+            end_point--;
+        }
+        else if (arr[i] > arr[end_point]) {
+            swap(arr[end_point - 1], arr[end_point]);
+            swap(arr[i], arr[end_point]);
+            end_point--;
+        }
+        else i++;
+    }
+    return end_point;
+}
+void QuickSort(int arr[], int start, int end) {
+    if (start < end) {
+        int pivot = Partition(arr, start, end);
+        QuickSort(arr, start, pivot - 1);
+        QuickSort(arr, pivot + 1, end);
+    }
+}
+void ShellSort(int arr[], int n) {
+    RandomArray(arr, 30);
+    for (int interval = n / 2; interval > 0; interval /= 2) {
+        for (int i = interval; i < n; i += 1) {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= interval && arr[j - interval] > temp; j -= interval) {
+                arr[j] = arr[j - interval];
+            }
+            arr[j] = temp;
+        }
+    }
+    ShowArray(arr, n);
+}
+void CountingSort(int source[], int dest[], int size_of_source, int limit) {
+    int* indexArr = new int[limit + 1];
+    for (int i = 0; i <= limit; i++)
+        indexArr[i] = 0;
+   
+    for (int i = 0; i < size_of_source; i++)
+        indexArr[source[i]]++;
+ 
+    for (int i = 1; i <= limit; i++) 
+        indexArr[i] += indexArr[i - 1];
+    
+    for (int i = size_of_source - 1; i >= 0; i--) {
+        dest[indexArr[source[i]] - 1] = source[i];
+        indexArr[source[i]]--;
+    }
+    delete[] indexArr;
+}
+int main() {
+    srand(time(NULL));
+    int option;
+    do {
+        cout << "1.ShellSort \n2.BubbleSort \n3.QuickSort \n4.InsertionSort \n5.IndividualTask\n6.Quit\nOption: ";
+        cin >> option;
+        int arr[30];
+        switch (option) {
+        default: cout << "No such option given...\n"; break;
+        case 1: ShellSort(arr, 30); break;
+        case 2: BubbleSort(arr, 0, 30); break;
+        case 3: RandomArray(arr, 30); QuickSort(arr, 0, 29); ShowArray(arr, 30); break;
+        case 4: InsertionSort(arr, 0, 30); break;
+        case 5:{ 
+            RandomArray(arr, 30);
+            int* result = new int[30];
+            for (int i = 0; i < 30; i++)
+                result[i] = -1;
+            CountingSort(arr, result, 30, 200);
+            ShowArray(result, 30); break;
+        }
+        case 6: cout << "Quit...";  return 0;
+        }
+    } while (option != 6);
+}
